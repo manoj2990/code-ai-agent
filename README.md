@@ -19,8 +19,7 @@ He delivers answers like a senior dev with a sense of humor and no time to waste
 - 🧹 Avoid long-winded AI lectures
 - 🎤 Laugh a little while you learn
 
-> _"You're stuck in a loop? Sidd’s already 3 bugs ahead."_ 😎
-
+Think: ChatGPT meets Tony Stark, but without the billionaire ego (okay maybe a little).
 ---
 
 ## ✨ Features
