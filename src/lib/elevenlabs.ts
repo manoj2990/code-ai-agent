@@ -7,7 +7,7 @@ export async function textToSpeech(text: string): Promise<string> {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'xi-api-key': process.env.ELEVENLABS_API_KEY!,
+        'xi-api-key': process.env.ELEVENLABS_API_KEY! || "my-elevenlabs-api-key",
       },
       body: JSON.stringify({
         text,

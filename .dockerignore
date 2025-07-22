@@ -1,0 +1,39 @@
+# Node dependencies
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build output
+.next
+out
+dist
+build
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS/Editor/System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Git and project files not needed in image
+.git
+.gitignore
+.gitattributes
+README.md
+LICENSE
+Dockerfile
+docker-compose.yml
+.dockerignore
+*.md
+
+# IDE/editor folders
+.vscode
+.idea
+*.code-workspace

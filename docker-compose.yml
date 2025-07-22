@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  code-ai-agent:
+    image: manojmeena2990/code-ai-agent:v1
+    container_name: code-ai-agent-container
+
+    # Maps port 3000 inside the container to port 3000 on your host machine
+    ports:
+      - "3000:3000"
+
+    # Loads environment variables from a local .env file
+    env_file:
+      - .env.local
+
+    # Ensures container always restarts if it crashes (optional but helpful in production/dev)
+    restart: unless-stopped
