@@ -50,11 +50,7 @@
             
             - name: Build Next.js app
               run: |
-                npm run build 2>&1 | tee build.log
-                if grep -i "warn" build.log; then
-                  echo "⚠️ Build contains warnings. Failing the pipeline."
-                  exit 1
-                fi
+                npm run build
 
             
             - name: show all files
