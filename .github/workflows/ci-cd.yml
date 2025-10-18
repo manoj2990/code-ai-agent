@@ -1,0 +1,86 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches: [main]
+
+        
+    pull_request:
+        branches: [main]
+
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: build the project
+        runs-on: ubuntu-latest
+        environment: production
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: setup node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: '21'
+                cache: 'npm'
+                cache-dependency-path: '**/package-lock.json'
+            
+            - name: install dependencies
+              run: npm ci
+            
+            - name: run tests
+              run: echo "No tests available"
+            
+            - name: build project
+              run: npm run build
+        
+    
+    dockerize:
+        name: build image and push to Docker Hub
+        runs-on: ubuntu-latest
+        needs: build
+        environment: production
+
+        steps: 
+            - name: checkout repository
+              uses: actions/checkout@v3
+            
+            - name: login to docker hub
+              uses: docker/login-action@v2
+              with:
+                username: ${{ secrets.DOCKER_HUB_USERNAME }}
+                password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+                registry: docker.io
+                path: code-ai-agent
+                tags: latest
+                build-args: |
+                    NODE_ENV=production
+            
+            - name: build and push docker image
+              uses: docker/build-push-action@v4
+              with:
+                context: .
+                push: true
+                tags: manojmeena2990/code-ai-agent:v1
+
+    
+    deploy:
+        name: deploy to vercel
+        runs-on: ubuntu-latest
+        needs: dockerize
+        environment: production
+
+        steps: 
+            - name: checkout repository
+              uses: actions/checkout@v3
+
+            - name: install vercel CLI
+              run: npm install -g vercel
+
+            - name: deploy to vercel
+              run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+            
+            - name: success message
+              run: echo "Deployed Successfully to Vercel"
