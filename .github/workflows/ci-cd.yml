@@ -52,11 +52,7 @@ jobs:
               with:
                 username: ${{ secrets.DOCKER_HUB_USERNAME }}
                 password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-                registry: docker.io
-                path: code-ai-agent
-                tags: latest
-                build-args: |
-                    NODE_ENV=production
+        
             
             - name: build and push docker image
               uses: docker/build-push-action@v4
@@ -80,7 +76,7 @@ jobs:
               run: npm install -g vercel
 
             - name: deploy to vercel
-              run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+              run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
             
             - name: success message
               run: echo "Deployed Successfully to Vercel"
