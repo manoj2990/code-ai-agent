@@ -30,10 +30,10 @@
 
         steps:
             - name: checkout repository
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
             
             - name: setup node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ env.NODE_VERSION }}
                   cache: 'npm'
@@ -55,7 +55,7 @@
               run: ls -la .next
             
             - name: upload production build artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: production-build
                   path: .next
